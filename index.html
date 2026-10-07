@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fuzz Room — Galeria de Rock</title>
+  <meta name="description" content="Galeria de fotos, pôsteres e capas do rock, organizada por época e estilo.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a href="#" class="logo">Fuzz Room</a>
+    <nav>
+      <a href="#galeria">Galeria</a>
+      <a href="#sobre">Sobre</a>
+      <a href="#contato">Contato</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <h1 class="hero-title"><span>Alto</span><span>demais</span><span>pra</span><span>ignorar.</span></h1>
+      <div class="hero-side">
+        <p>Fotos de palco, pôsteres de show e capas de disco que marcaram cinco décadas de rock.</p>
+        <a class="btn" href="#galeria">Ver a galeria</a>
+      </div>
+    </section>
+
+    <section id="galeria" class="gallery-section">
+      <div class="gallery-head">
+        <h2>Galeria</h2>
+        <div class="filters" role="group" aria-label="Filtrar por estilo">
+          <button class="chip is-active" data-filter="todos">Todos</button>
+          <button class="chip" data-filter="classico">Clássico</button>
+          <button class="chip" data-filter="punk">Punk</button>
+          <button class="chip" data-filter="grunge">Grunge</button>
+          <button class="chip" data-filter="metal">Metal</button>
+        </div>
+      </div>
+      <div id="grid" class="grid"></div>
+    </section>
+
+    <section id="sobre" class="about">
+      <h2>Sobre</h2>
+      <p>A Fuzz Room reúne registros de shows e arte de discos em um só lugar. Cada imagem tem banda, ano e local. Clique em uma foto para ampliar e use as setas do teclado para navegar.</p>
+    </section>
+
+    <section id="contato" class="contact">
+      <h2>Tem uma foto para enviar?</h2>
+      <form id="contact-form" novalidate>
+        <label>Nome <input type="text" name="nome" required></label>
+        <label>E-mail <input type="email" name="email" required></label>
+        <label>Mensagem <textarea name="msg" rows="3" required></textarea></label>
+        <button class="btn" type="submit">Enviar mensagem</button>
+        <p id="form-status" role="status"></p>
+      </form>
+    </section>
+  </main>
+
+  <footer class="footer">© <span id="year"></span> Fuzz Room</footer>
+
+  <div id="lightbox" class="lightbox" hidden>
+    <button class="lb-close" aria-label="Fechar">Fechar</button>
+    <button class="lb-nav lb-prev" aria-label="Anterior">‹</button>
+    <figure>
+      <div id="lb-art" class="lb-art"></div>
+      <figcaption id="lb-caption"></figcaption>
+    </figure>
+    <button class="lb-nav lb-next" aria-label="Próxima">›</button>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
