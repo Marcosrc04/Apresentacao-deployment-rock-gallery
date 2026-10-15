@@ -81,5 +81,3 @@ document.getElementById("contact-form").addEventListener("submit", e => {
 });
 
 document.getElementById("year").textContent = new Date().getFullYear();
-
-   const erro = ;
