@@ -1,1 +1,64 @@
+name: Pipeline Galeria de Rock
 
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  validar-e-testar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Instalar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Validar HTML
+        run: npx --yes htmlhint index.html
+
+      - name: Verificar sintaxe do JavaScript
+        run: node --check script.js
+
+      - name: Testar arquivos obrigatórios
+        run: |
+          test -f index.html
+          test -f style.css
+          test -f script.js
+
+  build:
+    needs: validar-e-testar
+    runs-on: ubuntu-latest
+    steps:
+      - name: Baixar o código
+        uses: actions/checkout@v4
+
+      - name: Preparar arquivos para publicação
+        run: |
+          mkdir dist
+          cp index.html style.css script.js dist/
+          if [ -d img ]; then cp -r img dist/; fi
+
+      - name: Empacotar o site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Publicar no GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
